@@ -1,16 +1,5 @@
 import * as dao from "./dao.js";
 
-const SAMPLE_POSTS = [
-    {
-        pid: '1',
-        creator: '1',
-    },
-    {
-        pid: '2',
-        name: '2',
-    },
-]
-
 export const getPostByPid = async (pid) => {
     const post = await dao.findPostByPidDb(pid);
     return post;
@@ -44,4 +33,19 @@ export const addDislikeToPost = async (pid, uid) => {
 export const removeDislikeFromPost = async (pid, uid) => {
     const updatedPost = await dao.removeDislikeFromPostDb(pid, uid);
     return updatedPost;
+}
+
+export const getPostsByCreator = async (creator) => {
+    const posts = await dao.getPostsByCreatorDb(creator);
+    return posts;
+}
+
+export const getAllPosts = async () => {
+    const posts = await dao.getAllPostsDb();
+    return posts;
+}
+
+export const getPostsByArtistId = async (artistId) => {
+    const posts = await dao.getPostsByArtistIdDb(artistId);
+    return posts;
 }

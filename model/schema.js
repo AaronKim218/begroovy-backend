@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
         enum: ["LISTENER", "ARTIST"],
         required: true,
     },
+    spotifyId: { type: String, required: false },
 },
 { collection: "users" });
 
@@ -17,7 +18,7 @@ export const userModel = mongoose.model("users", userSchema);
 
 const postSchema = new mongoose.Schema({
     creator: { type: String, required: true },
-    songId: { type: String, required: true },
+    spotifySongId: { type: String, required: true },
     // likes is an array of user ids
     likes: { type: [String], required: true },
     // dislikes is an array of user ids
@@ -25,6 +26,7 @@ const postSchema = new mongoose.Schema({
     // comments is an array of objects that contain the user id and the comment
     comments: { type: [Object], required: true },
     createdAt: { type: Date, required: true },
+    spotifyArtistIds: { type: [String], required: true },
 },
 { collection: "posts" });
 

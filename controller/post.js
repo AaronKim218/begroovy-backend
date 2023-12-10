@@ -1,5 +1,5 @@
 import express from 'express'
-import { getPostByPid, createPost, deletePost, addLikeToPost, addDislikeToPost, removeLikeFromPost, removeDislikeFromPost } from '../model/post/post.js';
+import { getPostByPid, createPost, deletePost, addLikeToPost, addDislikeToPost, removeLikeFromPost, removeDislikeFromPost, getPostsByCreator, getAllPosts } from '../model/post/post.js';
 
 const postRouter = express.Router();
 
@@ -61,6 +61,33 @@ postRouter.put('/:pid/undislike/:uid', async (req, res) => {
     try {
         const updatedPost = await removeDislikeFromPost(req.params.pid, req.params.uid);
         res.json(updatedPost);
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+});
+
+postRouter.get('/creator/:creator', async (req, res) => {
+    try {
+        const posts = await getPostsByCreator(req.params.creator);
+        res.json(posts);
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+});
+
+postRouter.get('/', async (req, res) => {
+    try {
+        const posts = await getAllPosts();
+        res.json(posts);
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+});
+
+postRouter.get('/artist/:artistId', async (req, res) => {
+    try {
+        const posts = await getPostsByArtistId(req.params.artistId);
+        res.json(posts);
     } catch (error) {
         res.status(400).json({message: error.message});
     }
