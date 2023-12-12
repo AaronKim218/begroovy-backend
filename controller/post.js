@@ -8,7 +8,7 @@ postRouter.get('/:pid', async (req, res) => {
         const post = await getPostByPid(req.params.pid);
         res.json(post);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -17,7 +17,7 @@ postRouter.post('/', async (req, res) => {
         const newPost = await createPost(req.body);
         res.json(newPost);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -26,7 +26,7 @@ postRouter.delete('/:pid', async (req, res) => {
         const deletedPost = await deletePost(req.params.pid);
         res.json(deletedPost);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -35,7 +35,7 @@ postRouter.put('/:pid/like/:uid', async (req, res) => {
         const updatedPost = await addLikeToPost(req.params.pid, req.params.uid);
         res.json(updatedPost);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -44,7 +44,7 @@ postRouter.put('/:pid/dislike/:uid', async (req, res) => {
         const updatedPost = await addDislikeToPost(req.params.pid, req.params.uid);
         res.json(updatedPost);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -53,7 +53,7 @@ postRouter.put('/:pid/unlike/:uid', async (req, res) => {
         const updatedPost = await removeLikeFromPost(req.params.pid, req.params.uid);
         res.json(updatedPost);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -62,7 +62,7 @@ postRouter.put('/:pid/undislike/:uid', async (req, res) => {
         const updatedPost = await removeDislikeFromPost(req.params.pid, req.params.uid);
         res.json(updatedPost);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -71,7 +71,7 @@ postRouter.get('/creator/:creator', async (req, res) => {
         const posts = await getPostsByCreator(req.params.creator);
         res.json(posts);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -80,7 +80,7 @@ postRouter.get('/', async (req, res) => {
         const posts = await getAllPosts();
         res.json(posts);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -89,7 +89,7 @@ postRouter.get('/artist/:artistId', async (req, res) => {
         const posts = await getPostsByArtistId(req.params.artistId);
         res.json(posts);
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
 });
 
