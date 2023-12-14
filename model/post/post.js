@@ -6,6 +6,7 @@ export const getPostByPid = async (pid) => {
 }
 
 export const createPost = async (post) => {
+    post.createdAt = new Date();
     const newPost = await dao.createPostDb(post);
     return newPost;
 }

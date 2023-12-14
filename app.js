@@ -4,6 +4,7 @@ import cors from 'cors'
 import userRouter from "./controller/user.js";
 import postRouter from "./controller/post.js";
 import authRouter from "./controller/auth.js";
+import songRouter from "./controller/song.js";
 import session from "express-session";
 
 const app = express()
@@ -34,5 +35,6 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/post', postRouter);
+app.use('/api/song', songRouter);
 
 export default app;
