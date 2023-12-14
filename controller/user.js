@@ -1,5 +1,5 @@
 import express from 'express'
-import { getUserByUid, createUser, deleteUser, updateUser } from '../model/user/user.js';
+import { getUserByUid, createUser, deleteUser, updateUser, getListenerStatsByUid, getArtistStatsByUid } from '../model/user/user.js';
 
 const userRouter = express.Router();
 
@@ -34,6 +34,25 @@ userRouter.put('/:uid', async (req, res) => {
     try {
         const updatedUser = await updateUser(req.params.uid, req.body);
         res.json(updatedUser);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
+
+userRouter.get('/listener/stats/:uid', async (req, res) => {
+    try {
+        const stats = await getListenerStatsByUid(req.params.uid);
+        res.json(stats);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
+
+userRouter.get('/artist/stats/:uid', async (req, res) => {
+    try {
+        const artistId = req.query.artistId;
+        const stats = await getArtistStatsByUid(req.params.uid, artistId);
+        res.json(stats);
     } catch (error) {
         res.status(500).json({message: error.message});
     }

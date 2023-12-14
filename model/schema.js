@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         enum: ["LISTENER", "ARTIST"],
         required: true,
     },
-    spotifyId: { type: String, required: false },
+    spotifyId: { type: String },
 },
 { collection: "users" });
 
@@ -23,12 +23,19 @@ const postSchema = new mongoose.Schema({
     likes: { type: [String], required: true },
     // dislikes is an array of user ids
     dislikes: { type: [String], required: true },
-    // comments is an array of objects that contain the user id and the comment
-    comments: { type: [Object], required: true },
     createdAt: { type: Date, required: true },
     spotifyArtistIds: { type: [String], required: true },
 },
 { collection: "posts" });
 
-export const postModel = mongoose.model("posts", postSchema);    
+export const postModel = mongoose.model("posts", postSchema);
+
+const groupSchema = new mongoose.Schema({
+    artistId: { type: String, required: true, unique: true },
+    members: { type: [String], required: true },
+    comments: { type: [Object], required: true },
+},
+{ collection: "groups" });
+
+export const groupModel = mongoose.model("groups", groupSchema);
 

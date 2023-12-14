@@ -5,6 +5,7 @@ import userRouter from "./controller/user.js";
 import postRouter from "./controller/post.js";
 import authRouter from "./controller/auth.js";
 import songRouter from "./controller/song.js";
+import groupRouter from "./controller/group.js";
 import session from "express-session";
 
 const app = express()
@@ -36,5 +37,6 @@ app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/post', postRouter);
 app.use('/api/song', songRouter);
+app.use('/api/group', groupRouter);
 
 export default app;

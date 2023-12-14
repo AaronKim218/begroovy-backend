@@ -36,5 +36,6 @@ export const removeDislikeFromPostDb = (pid, uid) => {
 
 // get all posts where artist id is in the array of artist ids
 export const getPostsByArtistIdDb = (artistId) => {
+    console.log(artistId);
     return postModel.find({ spotifyArtistIds: artistId });
 };

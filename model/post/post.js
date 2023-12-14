@@ -1,4 +1,5 @@
 import * as dao from "./dao.js";
+import { createGroup, getGroupByArtist, addMemberToGroup } from "../group/group.js";
 
 export const getPostByPid = async (pid) => {
     const post = await dao.findPostByPidDb(pid);
@@ -8,6 +9,16 @@ export const getPostByPid = async (pid) => {
 export const createPost = async (post) => {
     post.createdAt = new Date();
     const newPost = await dao.createPostDb(post);
+
+    for (const artistId of post.spotifyArtistIds) {
+        const group = await getGroupByArtist(artistId);
+        if (group) {
+            const updatedGroup = await addMemberToGroup(group._id, post.creator);
+        } else {
+            const newGroup = await createGroup({ artistId: artistId, members: [post.creator] });
+        }
+    }
+
     return newPost;
 }
 
